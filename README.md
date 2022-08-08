@@ -1,12 +1,7 @@
 # Whatsapp Group Analyzer
 
 
-Analyze automatically your WhatsApp group conversations just by uploading a text file.
-
-
-## How to use it 
-
-
+Analyze automatically your WhatsApp group conversations just by uploading a text file. 
 Go to the application website HYPERLINK, follow the instructions on the sidebar and enjoy !
 
 
@@ -53,7 +48,7 @@ the size of the words is proportional to its frequency.
 - Distribution of the most used emojis with analysis of the biggest contributors.
 
 <p align="center">
-  <img src="assets/emoji_percentages.png" width="700" height="450"/>
+  <img src="assets/emoji_percentages.png" width="500" height="450"/>
 </p>
 
 
@@ -67,12 +62,16 @@ So you have to choose a conversation with at least 3 people.
 
 2. Depending on OS and language, WhatsApp conversation format can vary a lot.
 There are currently two supported formats (one for French and one for English conversation). 
-If you want the application to be compatible with your format, you can either
+If you want the application to be compatible with your format, you can either :
 
 
-- Either you add your WhatsApp format to the current code by modifying XXXXXX
- (mettre les liens vers les lignes de codes en rajoutant #L21-L23)
-- Or you format your code to one of the two known formats at the moment :
+- Add your WhatsApp format to the current code by adding it
+[here](https://github.com/Arnautt/whatsapp-group-analyzer/blob/master/app.py#L32-L46) 
+
+You'll need to specify two variables : **date_format** (Python datetime format of your conversation)
+and **header** (the associated regex with the extra character between date and message name)
+
+- Or format your conversation to one of the two known formats at the moment :
 
 ```
 10/03/2022 à 19:49 - Name: Your message (French WhatsApp)
@@ -80,7 +79,9 @@ If you want the application to be compatible with your format, you can either
 ```
 
 3. The application uses Natural Language Processing and a wordcloud plot to analyze the words of your conversation.
-If your conversation is not in French or English, please add your language here XXXX (mettre les lignes)
+If your conversation is not in French or English, please add your language
+[here](https://github.com/Arnautt/whatsapp-group-analyzer/blob/master/app.py#L78-L85)
+following the same structure.
 
 
 ## :rocket: Technical stack 
