@@ -2,7 +2,8 @@
 
 
 Analyze automatically your WhatsApp group conversations just by uploading a text file. 
-Go to the application website HYPERLINK, follow the instructions on the sidebar and enjoy !
+Go to the application [website](https://arnautt-whatsapp-group-analyzer-app-14gt3z.streamlitapp.com/),
+follow the instructions on the sidebar and enjoy !
 
 
 
@@ -58,7 +59,7 @@ the size of the words is proportional to its frequency.
 
 
 1. The application allows you to analyze WhatsApp groups only.
-So you have to choose a conversation with at least 3 people.
+So you have to choose a **conversation with at least 3 people**.
 
 2. Depending on OS and language, WhatsApp conversation format can vary a lot.
 There are currently two supported formats (one for French and one for English conversation). 
@@ -80,7 +81,7 @@ and **header** (the associated regex with the extra character between date and m
 
 3. The application uses Natural Language Processing and a wordcloud plot to analyze the words of your conversation.
 If your conversation is not in French or English, please add your language
-[here](https://github.com/Arnautt/whatsapp-group-analyzer/blob/master/app.py#L78-L85)
+[here](https://github.com/Arnautt/whatsapp-group-analyzer/blob/master/app.py#L78-L85), 
 following the same structure.
 
 

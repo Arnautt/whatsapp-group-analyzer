@@ -3,8 +3,8 @@ import os
 import matplotlib.pyplot as plt
 import plotly.express as px
 import plotly.graph_objects as go
-import plotly.offline as pyo
 import seaborn as sns
+import nltk
 from nltk import word_tokenize
 from nltk.corpus import stopwords
 from PIL import Image
@@ -12,6 +12,8 @@ from wordcloud import WordCloud
 
 from .data import *
 
+# NLTK dependencies
+nltk.download('punkt')
 
 def plot_messages_per_day(data, show=True):
     """doc"""
