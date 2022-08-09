@@ -16,7 +16,8 @@ def get_data_from_txt(f, header=HEADER, date_format=DATE_FORMAT):
     tmp = []
     joined = " ".join(f)
     splitted = re.compile(header).split(joined)[1:]  # premier = vide
-    msgs = [splitted[2 * i] + splitted[2 * i + 1] for i in range(len(splitted) // 2)]
+    msgs = [splitted[2 * i] + splitted[2 * i + 1]
+            for i in range(len(splitted) // 2)]
 
     for msg in msgs:
         if is_message(msg):
@@ -44,6 +45,3 @@ def read_data(data_path, file, header=HEADER, date_format=DATE_FORMAT):
     f = open(_path, "r")
     data = get_data_from_txt(f, header, date_format)
     return data
-
-
-

@@ -16,7 +16,7 @@ def plot_messages_per_day(data, show=True):
     """doc"""
     msg_per_day = get_nb_message_per_day(data)
     plt.style.use("seaborn-bright")
-    plt.figure(figsize=(14,5))
+    plt.figure(figsize=(14, 5))
     sns.lineplot(data=msg_per_day, x="day", y="date")
     plt.ylabel("number of message")
     plt.xlabel("day")
@@ -29,7 +29,7 @@ def plot_messages_per_day(data, show=True):
 
 def plot_moving_nb_messages(data, show=True):
     """doc"""
-    plt.figure(figsize=(14,5))
+    plt.figure(figsize=(14, 5))
     sns.lineplot(data=data, x="day", y="date")
     plt.ylabel("weekly moving number of message")
     plt.xlabel("date")
@@ -65,8 +65,8 @@ def plot_emoji_data(data, show=True):
     """doc"""
     tmp = get_emoji_counter(data)
     fig = px.sunburst(tmp,
-                  path=['emoji', 'author'],
-                  values='count')
+                      path=['emoji', 'author'],
+                      values='count')
     fig.update_traces(textinfo="label+percent parent")
     fig.update_layout(
         margin=dict(l=20, r=20, t=20, b=20),
@@ -191,7 +191,8 @@ def plot_percentage_msg_emoji(data, show=True):
     # Add percentage annotations
     for x, y in enumerate(df["with_emoji"]):
         y_offset = 0.05 if y != 0 else -0.02
-        plt.text(x - 0.14, y - y_offset, f"{round(y * 100, 1)}%", weight='bold')
+        plt.text(x - 0.14, y - y_offset,
+                 f"{round(y * 100, 1)}%", weight='bold')
 
     if show:
         plt.show()
@@ -205,7 +206,8 @@ def plot_wordcloud(data, language="french", show=True):
     # Get tokens without stop words
     all_msg = " ".join(data["message"])
     tokens = word_tokenize(all_msg)
-    filtered_tokens = [word for word in tokens if word not in stopwords.words(language)]
+    filtered_tokens = [
+        word for word in tokens if word not in stopwords.words(language)]
     filtered_tokens = " ".join(filtered_tokens)
 
     # Plot word cloud

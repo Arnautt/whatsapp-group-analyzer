@@ -31,43 +31,51 @@ def get_questions_by_name(data):
         is_question = ("?" in row["message"]) * 1
         n_questions[row["author"]] += is_question
 
-    n_questions = {k: v for k, v in sorted(n_questions.items(), key=lambda item: item[1], reverse=True)}
+    n_questions = {k: v for k, v in sorted(
+        n_questions.items(), key=lambda item: item[1], reverse=True)}
     return n_questions
 
 
 def get_number_of_message(data):
     """number total de message par personne"""
     res = data.groupby("author").agg("count")["message"].to_dict()
-    res = {k: v for k, v in sorted(res.items(), key=lambda item: item[1], reverse=True)}
+    res = {k: v for k, v in sorted(
+        res.items(), key=lambda item: item[1], reverse=True)}
     return res
 
 
 def get_maximal_silence_period(data):
     """doc"""
-    get_max = lambda x: max((x['date']-x['date'].shift()).fillna(pd.Timedelta(seconds=0)))
+    def get_max(x): return max(
+        (x['date']-x['date'].shift()).fillna(pd.Timedelta(seconds=0)))
     res = data.groupby("author").apply(get_max).to_dict()
-    res = {k: str(v) for k, v in sorted(res.items(), key=lambda item: item[1], reverse=True)}
+    res = {k: str(v) for k, v in sorted(
+        res.items(), key=lambda item: item[1], reverse=True)}
     return res
 
 
 def get_mean_message_len(data):
     """taille moyenne des messages par personne"""
-    res = data.groupby("author").apply(lambda x: np.mean([len(msg) for msg in x["message"]])).to_dict()
-    res = {k: v for k, v in sorted(res.items(), key=lambda item: item[1], reverse=True)}
+    res = data.groupby("author").apply(lambda x: np.mean(
+        [len(msg) for msg in x["message"]])).to_dict()
+    res = {k: v for k, v in sorted(
+        res.items(), key=lambda item: item[1], reverse=True)}
     return res
 
 
 def percentage_msg_with_emoji(data):
     """percentage of message containing one or more emoji"""
-    res = data.groupby("author").apply(lambda x: np.mean([emoji_count(msg) != 0 for msg in x["message"]])).to_dict()
-    res = {k: v for k, v in sorted(res.items(), key=lambda item: item[1], reverse=True)}
+    res = data.groupby("author").apply(lambda x: np.mean(
+        [emoji_count(msg) != 0 for msg in x["message"]])).to_dict()
+    res = {k: v for k, v in sorted(
+        res.items(), key=lambda item: item[1], reverse=True)}
     return res
 
 
 def get_nb_message_per_day(data):
     """doc"""
     days = pd.DataFrame([datetime.strptime(x, '%d/%m/%Y') for x in data["date"].dt.strftime('%d/%m/%Y')],
-                    columns=["day"])
+                        columns=["day"])
 
     tmp = pd.concat((data["date"], days), axis=1)
     tmp = tmp.groupby("day").agg("count").reset_index()
@@ -123,7 +131,8 @@ def get_hourly_data(data):
     data_copy = data_copy[["author", "hour"]]
     data_copy = data_copy.groupby(["author", "hour"]).size().reset_index()
     data_copy.columns = ["author", "hour", "count"]
-    data_copy = data_copy.pivot_table(index=["hour"], columns=["author"]).replace(np.nan, 0)
+    data_copy = data_copy.pivot_table(
+        index=["hour"], columns=["author"]).replace(np.nan, 0)
     data_copy = data_copy.T
 
     # Add hours not present
@@ -133,7 +142,8 @@ def get_hourly_data(data):
 
     # To int & sort columns
     data_copy = data_copy.astype(int)
-    data_copy = data_copy.reindex(list(range(6, -1, -1)) + list(range(23, 6, -1)), axis=1)
+    data_copy = data_copy.reindex(
+        list(range(6, -1, -1)) + list(range(23, 6, -1)), axis=1)
 
     # Normalize
     data_copy = (data_copy.div(data_copy.sum(axis=1), axis=0) * 100).round(2)
@@ -148,7 +158,8 @@ def get_daily_data(data):
     data_copy = data_copy[["author", "day"]]
     data_copy = data_copy.groupby(["author", "day"]).size().reset_index()
     data_copy.columns = ["author", "day", "count"]
-    data_copy = data_copy.pivot_table(index=["day"], columns=["author"]).replace(np.nan, 0)
+    data_copy = data_copy.pivot_table(
+        index=["day"], columns=["author"]).replace(np.nan, 0)
     data_copy = data_copy.T
 
     # Add days not present
@@ -171,7 +182,8 @@ def get_monthly_data(data):
     data_copy = data_copy[["author", "month"]]
     data_copy = data_copy.groupby(["author", "month"]).size().reset_index()
     data_copy.columns = ["author", "month", "count"]
-    data_copy = data_copy.pivot_table(index=["month"], columns=["author"]).replace(np.nan, 0)
+    data_copy = data_copy.pivot_table(index=["month"], columns=[
+                                      "author"]).replace(np.nan, 0)
     data_copy = data_copy.T
 
     # Add days not present
@@ -196,11 +208,14 @@ def get_mean_media_interval(data, media_message):
         data_tmp_media = data_tmp[data_tmp["message"] == media_message]
 
         # Add first and last message
-        data_tmp_media = pd.concat((data.iloc[[0]], data_tmp_media), axis=0, ignore_index=True)
-        data_tmp_media = pd.concat((data_tmp_media, data.iloc[[-1]]), axis=0, ignore_index=True)
+        data_tmp_media = pd.concat(
+            (data.iloc[[0]], data_tmp_media), axis=0, ignore_index=True)
+        data_tmp_media = pd.concat(
+            (data_tmp_media, data.iloc[[-1]]), axis=0, ignore_index=True)
 
         # Get time interval between each media message
-        intervals = (data_tmp_media["date"] - data_tmp_media["date"].shift()).iloc[1:]
+        intervals = (data_tmp_media["date"] -
+                     data_tmp_media["date"].shift()).iloc[1:]
         # remove media too close (on peut en envoyer plusieurs à la fois avec peu de différence de temps entre deux)
         intervals = [t for t in intervals if t > timedelta(minutes=30)]
         mean_media_interval = np.mean(intervals)
