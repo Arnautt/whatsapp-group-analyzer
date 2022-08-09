@@ -1,7 +1,8 @@
-import numpy as np
-from emoji import emoji_count
-import pandas as pd
 from datetime import datetime, timedelta
+
+import numpy as np
+import pandas as pd
+from emoji import emoji_count
 
 
 def get_basic_infos(data, media_message):

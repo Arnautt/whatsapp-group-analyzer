@@ -1,14 +1,15 @@
 import os
 
 import matplotlib.pyplot as plt
-import seaborn as sns
 import plotly.express as px
 import plotly.graph_objects as go
 import plotly.offline as pyo
+import seaborn as sns
+from nltk import word_tokenize
+from nltk.corpus import stopwords
 from PIL import Image
 from wordcloud import WordCloud
-from nltk.corpus import stopwords
-from nltk import word_tokenize
+
 from .data import *
 
 
