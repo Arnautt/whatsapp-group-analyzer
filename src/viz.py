@@ -14,6 +14,7 @@ from .data import *
 
 # NLTK dependencies
 nltk.download('punkt')
+nltk.download('stopwords')
 
 def plot_messages_per_day(data, show=True):
     """doc"""
