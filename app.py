@@ -1,6 +1,8 @@
 import io
 
 import emoji
+import nltk
+
 import streamlit as st
 from langdetect import detect
 
@@ -13,6 +15,10 @@ from src.viz import (plot_daily_data, plot_emoji_data, plot_hourly_data,
                      plot_monthly_data, plot_moving_nb_messages,
                      plot_moving_nb_messages_individuals,
                      plot_percentage_msg_emoji, plot_wordcloud)
+
+# NLTK dependencies
+nltk.download('punkt')
+nltk.download('stopwords')
 
 # Page configuration
 st.set_page_config(layout="centered",
