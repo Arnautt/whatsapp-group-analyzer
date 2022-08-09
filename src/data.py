@@ -6,7 +6,21 @@ from emoji import emoji_count
 
 
 def get_basic_infos(data, media_message):
-    """doc"""
+    """
+    Basic infos of the conversation dataframe
+
+    Parameters
+    ----------
+    data: pd.DataFrame
+        Pre-processed conversation dataframe
+    media_message: str
+        Message value when a media is omitted (language dependant)
+
+    Returns
+    -------
+    result: dict
+        Basic statistics of the conversation
+    """
     result = {}
     result["start_date"] = data["date"].min()
     result["end_date"] = data["date"].max()
@@ -17,14 +31,38 @@ def get_basic_infos(data, media_message):
 
 
 def get_date_range(data):
-    """doc"""
+    """
+    Start date and end date of the conversation
+
+    Parameters
+    ----------
+    data: pd.DataFrame
+        Pre-processed conversation dataframe
+
+    Returns
+    -------
+    _min, _max: str
+        Start/end date
+    """
     _min = data["date"].min().strftime('%d/%m/%Y')
     _max = data["date"].max().strftime('%d/%m/%Y')
     return _min, _max
 
 
 def get_questions_by_name(data):
-    """doc"""
+    """
+    Number of questions for each participant in the conversation
+
+    Parameters
+    ----------
+    data: pd.DataFrame
+        Pre-processed conversation dataframe
+
+    Returns
+    -------
+    n_questions: dict
+        Name as key and number of questions as value
+    """
     n_questions = {author: 0 for author in data["author"].unique()}
 
     for _, row in data.iterrows():
@@ -37,7 +75,19 @@ def get_questions_by_name(data):
 
 
 def get_number_of_message(data):
-    """number total de message par personne"""
+    """
+    Total number of messages for each participant in the conversation
+
+    Parameters
+    ----------
+    data: pd.DataFrame
+        Pre-processed conversation dataframe
+
+    Returns
+    -------
+    res: dict
+        Name as key and number of messages as value
+    """
     res = data.groupby("author").agg("count")["message"].to_dict()
     res = {k: v for k, v in sorted(
         res.items(), key=lambda item: item[1], reverse=True)}
@@ -45,7 +95,19 @@ def get_number_of_message(data):
 
 
 def get_maximal_silence_period(data):
-    """doc"""
+    """
+    Maximal number of days without sending a message for each participant
+
+    Parameters
+    ----------
+    data: pd.DataFrame
+        Pre-processed conversation dataframe
+
+    Returns
+    -------
+    res: dict
+        Name as key, period of silence as value
+    """
     def get_max(x): return max(
         (x['date']-x['date'].shift()).fillna(pd.Timedelta(seconds=0)))
     res = data.groupby("author").apply(get_max).to_dict()
@@ -55,7 +117,19 @@ def get_maximal_silence_period(data):
 
 
 def get_mean_message_len(data):
-    """taille moyenne des messages par personne"""
+    """
+    Mean of the messages size for each participant in the conversation
+
+    Parameters
+    ----------
+    data: pd.DataFrame
+        Pre-processed conversation dataframe
+
+    Returns
+    -------
+    res: dict
+        Name as key, average message length as value
+    """
     res = data.groupby("author").apply(lambda x: np.mean(
         [len(msg) for msg in x["message"]])).to_dict()
     res = {k: v for k, v in sorted(
@@ -64,7 +138,19 @@ def get_mean_message_len(data):
 
 
 def percentage_msg_with_emoji(data):
-    """percentage of message containing one or more emoji"""
+    """
+   Percentage of messages with one or more emoji for each participant in the conversation
+
+    Parameters
+    ----------
+    data: pd.DataFrame
+        Pre-processed conversation dataframe
+
+    Returns
+    -------
+    res: dict
+        Name as key, proportion of message with emoji as value
+    """
     res = data.groupby("author").apply(lambda x: np.mean(
         [emoji_count(msg) != 0 for msg in x["message"]])).to_dict()
     res = {k: v for k, v in sorted(
@@ -73,7 +159,19 @@ def percentage_msg_with_emoji(data):
 
 
 def get_nb_message_per_day(data):
-    """doc"""
+    """
+    Number of messages for each day
+
+    Parameters
+    ----------
+    data: pd.DataFrame
+        Pre-processed conversation dataframe
+
+    Returns
+    -------
+    tmp: pd.DataFrame
+        Count the number of message for each day in the conversation
+    """
     days = pd.DataFrame([datetime.strptime(x, '%d/%m/%Y') for x in data["date"].dt.strftime('%d/%m/%Y')],
                         columns=["day"])
 
@@ -83,7 +181,19 @@ def get_nb_message_per_day(data):
 
 
 def get_moving_average_nb_message(data):
-    """doc"""
+    """
+    Moving number of message for a period of 7 days
+
+    Parameters
+    ----------
+    data: pd.DataFrame
+        Pre-processed conversation dataframe
+
+    Returns
+    -------
+    tmp: pd.DataFrame
+        Number of messages for a period of one week by rolling the date range
+    """
     tmp = get_nb_message_per_day(data)
 
     # Add day not present in database
@@ -105,7 +215,19 @@ def get_moving_average_nb_message(data):
 
 
 def get_emoji_counter(data):
-    """doc"""
+    """
+    Count the emoji and distinguish between each participants
+
+    Parameters
+    ----------
+    data: pd.DataFrame
+        Pre-processed conversation dataframe
+
+    Returns
+    -------
+    tmp: pd.DataFrame
+        For each participant, emoji used and the associated number of utilisation
+    """
     tmp = []
 
     for _, row in data.iterrows():
@@ -124,7 +246,20 @@ def get_emoji_counter(data):
 
 
 def get_hourly_data(data):
-    """doc"""
+    """
+    For each hour and each participant, compute the number of message.
+    Then normalize for each participant to have hourly distribution
+
+    Parameters
+    ----------
+    data: pd.DataFrame
+        Pre-processed conversation dataframe
+
+    Returns
+    -------
+    data_copy: pd.DataFrame
+        Normalized message frequency by hour for each participant
+    """
     # Add hour for each row and count nb of messages for tuple author/hour
     data_copy = data.copy()
     data_copy["hour"] = data.apply(lambda x: x["date"].hour, axis=1)
@@ -151,7 +286,20 @@ def get_hourly_data(data):
 
 
 def get_daily_data(data):
-    """doc"""
+    """
+    For each day and each participant, compute the number of message.
+    Then normalize for each participant to have daily distribution
+
+    Parameters
+    ----------
+    data: pd.DataFrame
+        Pre-processed conversation dataframe
+
+    Returns
+    -------
+    data_copy: pd.DataFrame
+        Normalized message frequency by day for each participant
+    """
     # Add day for each row and count nb of messages for tuple author/hour
     data_copy = data.copy()
     data_copy["day"] = data.apply(lambda x: x["date"].strftime("%A"), axis=1)
@@ -175,7 +323,20 @@ def get_daily_data(data):
 
 
 def get_monthly_data(data):
-    """doc"""
+    """
+    For each month and each participant, compute the number of message.
+    Then normalize for each participant to have monthly distribution
+
+    Parameters
+    ----------
+    data: pd.DataFrame
+        Pre-processed conversation dataframe
+
+    Returns
+    -------
+    data_copy: pd.DataFrame
+        Normalized message frequency by month for each participant
+    """
     # Add day for each row and count nb of messages for tuple author/hour
     data_copy = data.copy()
     data_copy["month"] = data.apply(lambda x: x["date"].strftime("%B"), axis=1)
@@ -199,7 +360,21 @@ def get_monthly_data(data):
 
 
 def get_mean_media_interval(data, media_message):
-    """doc"""
+    """
+    For each participant, compute the average time between sending a media
+
+    Parameters
+    ----------
+    data: pd.DataFrame
+        Pre-processed conversation dataframe
+    media_message: str
+        Message value when a media is omitted (language dependant)
+
+    Returns
+    -------
+    res: dict
+        Name as key and mean media interval as value
+    """
     res = {}
 
     for author in data["author"].unique():
@@ -222,7 +397,6 @@ def get_mean_media_interval(data, media_message):
 
         res[author] = mean_media_interval
 
-    #res = {k: str(v) for k, v in sorted(res.items(), key=lambda item: item[1])}
     res = {k: ":".join(str(v.round("H")).split(":")[:-1])
            for k, v in sorted(res.items(), key=lambda item: item[1])}
     return res

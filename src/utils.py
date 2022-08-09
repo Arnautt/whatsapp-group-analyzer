@@ -13,6 +13,6 @@ def load_config(path):
 def is_message(msg):
     """
     Test if a string is a message. Supposed to be in the following form :
-    ===> date - name: message
+    Date - Name: message
     """
     return bool(re.search(r'.*-.*:', msg))
