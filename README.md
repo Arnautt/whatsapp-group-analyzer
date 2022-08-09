@@ -91,12 +91,3 @@ following the same structure.
 - Application Deployment : streamlit 
 - Natural Language Processing : nltk 
 
-
-
-## TODO 
-
-python-sentiment-analysis-using-vader
-séparer les data et viz en emoji, temporal etc ? 
-remplire la doc 
-pip freeze 
-deploy with github 
