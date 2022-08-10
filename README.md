@@ -24,7 +24,7 @@
 > Who had the longest period without sending messages in our family group? <br /> 
 
 Use this app and you'll have all the answers you've ever wanted. **Analyze your WhatsApp group conversations on
-[this website](https://arnautt-whatsapp-group-analyzer-app-14gt3z.streamlitapp.com/) :**
+[this website](https://arnautt-whatsapp-group-analyzer-app-bgloq5.streamlitapp.com/) :**
 follow the instructions on the sidebar and enjoy.
 
 
