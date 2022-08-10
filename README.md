@@ -1,7 +1,7 @@
 <br />
 <h1>
 <p align="center">
-  <img src="assets/whatsapp_logo.png" alt="Logo" width="70" height="70">
+  <img src="assets/whatsapp_logo.png" alt="Logo" width="100" height="100">
 </p>
 </h1>
 
