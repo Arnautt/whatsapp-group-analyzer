@@ -6,21 +6,16 @@
 </h1>
 
 <p align="center">
-    Whatsapp Group Analyzer
+    Analyze your WhatsApp group conversations [here](https://arnautt-whatsapp-group-analyzer-app-14gt3z.streamlitapp.com/) :
+follow the instructions on the sidebar and enjoy !
     <br />
 </p>
 
-<p align="center">
-  <a href="#examples-gallery">Gallery</a> •
-  <a href="#warning-remarks">Remarks</a> •
-  <a href="#rocket-technical-stack">Technical stack</a> 
-</p>  
 
 
 
-Analyze automatically your WhatsApp group conversations just by uploading a text file. 
-Go to the application [website](https://arnautt-whatsapp-group-analyzer-app-14gt3z.streamlitapp.com/),
-follow the instructions on the sidebar and enjoy !
+
+
 
 
 
