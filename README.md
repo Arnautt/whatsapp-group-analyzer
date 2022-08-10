@@ -102,7 +102,7 @@ to one of the two known formats at the moment or let me know which language / fo
 
 3. The application uses Natural Language Processing and a wordcloud plot to analyze the words of your conversation.
 If your conversation is not in French or English, please add your language
-[here](https://github.com/Arnautt/whatsapp-group-analyzer/blob/master/app.py#L78-L85), 
+[here](https://github.com/Arnautt/whatsapp-group-analyzer/blob/master/app.py#L85-L92), 
 following the same structure.
 
 
