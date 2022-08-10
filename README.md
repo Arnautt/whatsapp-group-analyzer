@@ -17,10 +17,14 @@
 </p>  
 
 
+small porject description, what it can do ...
 
-Analyze your WhatsApp group conversations on [this website](https://arnautt-whatsapp-group-analyzer-app-14gt3z.streamlitapp.com/) :
-follow the instructions on the sidebar and enjoy !
 
+> **Analyze your WhatsApp group conversations on [this website](https://arnautt-whatsapp-group-analyzer-app-14gt3z.streamlitapp.com/). **
+Follow the instructions on the sidebar and enjoy !
+
+
+**Remark** : your data is of course not stored so feel free to use the application !
 
 
 ## Examples gallery
