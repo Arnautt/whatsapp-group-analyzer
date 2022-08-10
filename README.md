@@ -1,3 +1,22 @@
+<br />
+<h1>
+<p align="center">
+  <img src="assets/whatsapp_logo.png" alt="Logo" width="280" height="70">
+</p>
+</h1>
+
+<p align="center">
+    Whatsapp Group Analyzer
+    <br />
+</p>
+
+<p align="center">
+  <a href="#examples-gallery">Gallery</a> •
+  <a href="#warning-remarks">Remarks</a> •
+  <a href="#rocket-technical-stack">Technical stack</a> 
+</p>  
+
+
 # Whatsapp Group Analyzer
 
 
