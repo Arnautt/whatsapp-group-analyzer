@@ -1,7 +1,7 @@
 <br />
 <h1>
 <p align="center">
-  <img src="assets/whatsapp_logo.png" alt="Logo" width="280" height="70">
+  <img src="assets/whatsapp_logo.png" alt="Logo" width="70" height="70">
 </p>
 </h1>
 
@@ -16,8 +16,6 @@
   <a href="#rocket-technical-stack">Technical stack</a> 
 </p>  
 
-
-# Whatsapp Group Analyzer
 
 
 Analyze automatically your WhatsApp group conversations just by uploading a text file. 
