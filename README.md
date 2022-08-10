@@ -17,16 +17,15 @@
 </p>  
 
 
-Who talks the most in our WhatsApp conversation? <br />
-Who uses emoji the most and how often? <br />
-What time do your friends send the most messages? <br /> 
-What are the most recurring topics with my colleagues? <br />
-Who had the longest period without sending messages in our family group? <br /> 
+> Who talks the most in our WhatsApp conversation? <br />
+> Who uses emoji the most and how often? <br />
+> What time do your friends send the most messages? <br /> 
+> What are the most recurring topics with my colleagues? <br />
+> Who had the longest period without sending messages in our family group? <br /> 
 
-:arrow_right: Use this app and you'll have all the answers you've ever wanted.
-
-> **Analyze your WhatsApp group conversations on [this website](https://arnautt-whatsapp-group-analyzer-app-14gt3z.streamlitapp.com/).** 
-> <br /> Follow the instructions on the sidebar and enjoy.
+Use this app and you'll have all the answers you've ever wanted. **Analyze your WhatsApp group conversations on
+[this website](https://arnautt-whatsapp-group-analyzer-app-14gt3z.streamlitapp.com/) :**
+follow the instructions on the sidebar and enjoy.
 
 
 **Remark** : your data is not stored at any given time !
