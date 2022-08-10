@@ -6,7 +6,8 @@
 </h1>
 
 <p align="center">
-    Analyze your WhatsApp group conversations [here](https://arnautt-whatsapp-group-analyzer-app-14gt3z.streamlitapp.com/) :
+    Analyze your WhatsApp group conversations 
+<a href="https://arnautt-whatsapp-group-analyzer-app-14gt3z.streamlitapp.com/">here</a> :
 follow the instructions on the sidebar and enjoy !
     <br />
 </p>
