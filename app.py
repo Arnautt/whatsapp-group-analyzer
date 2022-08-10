@@ -19,6 +19,7 @@ from src.viz import (plot_daily_data, plot_emoji_data, plot_hourly_data,
 nltk.download('punkt')
 nltk.download('stopwords')
 
+
 # Page configuration
 st.set_page_config(layout="centered",
                    page_icon="💬",
@@ -35,6 +36,7 @@ st.sidebar.text(emoji.emojize("Created by Arnaud Trog."))
 
 st.sidebar.write(emoji.emojize("Import a group conversation and analyze it with the power of Python & data viz !"
                                " Features included are : emoji analyzer, temporal analysis, user activities and much more."))
+
 
 # Data configuration
 option = st.sidebar.selectbox(
@@ -58,6 +60,7 @@ else:
 uploaded_file = st.sidebar.file_uploader(
     "Choose a Whatsapp group conversation")
 
+
 # How to export conversation to analyze
 with st.sidebar.expander(emoji.emojize(":red_question_mark: How to export WhatsApp chat")):
     """
@@ -69,14 +72,16 @@ with st.sidebar.expander(emoji.emojize(":red_question_mark: How to export WhatsA
 st.sidebar.write("")
 
 
-### MAIN ###
+# Main page
 if uploaded_file is not None:
+    # Get pre-processed data from uploaded file
     bytes_data = uploaded_file.getvalue()
     txt_file = bytes_data.decode("utf-8")
     txt_file = io.StringIO(txt_file)
     data = get_data_from_txt(txt_file, header, date_format)
     detected_language = detect(" ".join(data["message"]))
 
+    # Detect the language in the conversation
     if detected_language == "fr":
         language = "french"
         media_message = "<Médias omis>"
@@ -86,10 +91,13 @@ if uploaded_file is not None:
     else:
         pass
 
+    # Create all sub-pages
     tab1, tab2, tab3, tab4, tab5 = st.tabs(
         ["Overall statistics", "Emoji", "Temporal", "Activity", "Words"])
 
+    # First sub-page : Overall statistics
     with tab1:
+        # Global information about the conversation
         st.markdown(
             f"<p style='text-align: center; font-size: 17px; font-weight: bold;'> {emoji.emojize('Overall statistics')} </p>",
             unsafe_allow_html=True)
@@ -103,6 +111,7 @@ if uploaded_file is not None:
         st.write(emoji.emojize(
             f":speech_balloon: Total number of messages : {infos['n_messages']}"))
 
+        # Who ask questions the most
         st.markdown('----')
         with st.container():
             st.markdown(
@@ -118,6 +127,7 @@ if uploaded_file is not None:
             st.write(emoji.emojize(
                 f":3rd_place_medal: {third[0]} with {third[1]} questions"))
 
+        # Who speaks the most
         st.markdown('----')
         with st.container():
             st.markdown(
@@ -134,6 +144,7 @@ if uploaded_file is not None:
             st.write(emoji.emojize(
                 f":3rd_place_medal: {third[0]} with {third[1]} messages and an average message size of {int(msg_len_per_author[third[0]])} characters"))
 
+        # Who had the longest period without a message
         st.markdown('----')
         with st.container():
             st.markdown(
@@ -149,6 +160,7 @@ if uploaded_file is not None:
             st.write(emoji.emojize(
                 f":3rd_place_medal: {third[0]} with {third[1]} of silence."))
 
+        # Who sends the most media (photos, videos, ...)
         st.markdown('----')
         with st.container():
             st.markdown(
@@ -165,26 +177,29 @@ if uploaded_file is not None:
             st.write(emoji.emojize(
                 f":3rd_place_medal: {third[0]} with media sent every {third[1]}."))
 
+    # Second sub-page : analysis of emoji usage
     with tab2:
         st.header("Emoji analysis")
+
+        # Graph with percentage of emoji usage
         st.markdown('----')
         with st.container():
             st.markdown(
                 f"<p style='text-align: center; font-size: 17px; font-weight: bold;'> Most used emoji in the conversation </p>",
                 unsafe_allow_html=True)
-            #st.write("Most used emoji in the conversation")
             fig = plot_emoji_data(data, show=False)
             st.plotly_chart(fig, use_container_width=True)
 
+        # Graph of percentage of messages with one or more emoji for each participant
         st.markdown('----')
         with st.container():
             st.markdown(
                 f"<p style='text-align: center; font-size: 17px; font-weight: bold;'> Who uses emoji the most ? </p>",
                 unsafe_allow_html=True)
-            #st.write("Who uses emoji the most?")
             fig = plot_percentage_msg_emoji(data, show=False)
             st.pyplot(fig, use_container_width=True)
 
+    # Third page : analysis of the periods when each participant sends the most messages
     with tab3:
         st.header("Temporal analysis")
 
@@ -212,9 +227,11 @@ if uploaded_file is not None:
             else:
                 st.write("not yet implemented")
 
+    # Fourth sub-page : global activity analysis
     with tab4:
         st.header("Activity analysis")
 
+        # Without participant specification
         st.markdown('----')
         with st.container():
             st.markdown(
@@ -224,15 +241,16 @@ if uploaded_file is not None:
             fig = plot_moving_nb_messages(data_tmp, show=False)
             st.pyplot(fig, use_container_width=True)
 
+        # With participant specification
         st.markdown('----')
         with st.container():
             st.markdown(
                 f"<p style='text-align: center; font-size: 17px; font-weight: bold;'> Moving number of messages per week (individual) </p>",
                 unsafe_allow_html=True)
-            #st.write(emoji.emojize(":right_arrow: Moving sum number of messages per week (individual)"))
             fig = plot_moving_nb_messages_individuals(data, show=False)
             st.pyplot(fig, use_container_width=True)
 
+    # Fifth sub-page : analysis of natural language
     with tab5:
         st.header("Natural language analysis")
         # st.markdown('----')
