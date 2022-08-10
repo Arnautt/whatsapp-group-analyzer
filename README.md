@@ -6,17 +6,20 @@
 </h1>
 
 <p align="center">
-    Analyze your WhatsApp group conversations 
-<a href="https://arnautt-whatsapp-group-analyzer-app-14gt3z.streamlitapp.com/">here</a> :
-follow the instructions on the sidebar and enjoy !
+    Whatsapp Group Analyzer
     <br />
 </p>
 
+<p align="center">
+  <a href="#examples-gallery">Gallery</a> •
+  <a href="#warning-remarks">Remarks</a> •
+  <a href="#rocket-technical-stack">Technical stack</a> 
+</p>  
 
 
 
-
-
+Analyze your WhatsApp group conversations on [this website](https://arnautt-whatsapp-group-analyzer-app-14gt3z.streamlitapp.com/) :
+follow the instructions on the sidebar and enjoy !
 
 
 
