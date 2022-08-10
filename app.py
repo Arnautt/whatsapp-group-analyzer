@@ -253,7 +253,6 @@ if uploaded_file is not None:
     # Fifth sub-page : analysis of natural language
     with tab5:
         st.header("Natural language analysis")
-        # st.markdown('----')
         st.info("The graph below represents the most used words in the conversation."
                 " The size of the words is proportional to its frequency after removing stop words"
                 " (i.e. common / useless words).")

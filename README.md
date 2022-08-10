@@ -42,14 +42,14 @@ the size of the words is proportional to its frequency.
 - Interactive comparison of the sending times of each message.
 
 <p align="center">
-  <img src="assets/hour_comparison.png" width="700" height="450"/>
+  <img src="assets/hour_comparison.png" width="600" height="450"/>
 </p>
 
 
 - Distribution of the most used emojis with analysis of the biggest contributors.
 
 <p align="center">
-  <img src="assets/emoji_percentages.png" width="500" height="450"/>
+  <img src="assets/emoji_percentages.png" width="450" height="450"/>
 </p>
 
 
